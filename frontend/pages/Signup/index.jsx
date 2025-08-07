@@ -3,10 +3,8 @@ import styles from "./styles.module.css";
 
 function Signup() {
 	const googleAuth = () => {
-		window.open(
-			`${process.env.REACT_APP_API_URL}/auth/google`,
-			"_self"
-		);
+	window.open(`${import.meta.env.VITE_API_URL}/auth/google`, "_self");
+
 	};
 	return (
 		<div className={styles.container}>
