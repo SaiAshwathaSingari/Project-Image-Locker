@@ -4,8 +4,12 @@ import axios from "axios";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
-import Dashboard from "../pages/Dashboard";
-import Register from "../pages/register"; // ✅ add this import
+import Dashboard from "../pages/dashboard";
+import Register from "../pages/register"; 
+import About from "../pages/Signup/about"; 
+import Terms from "../pages/Signup/terms";
+import Privacy from "../pages/Signup/privacy";
+
 import "./App.css";
 
 function App() {
@@ -59,6 +63,23 @@ function App() {
         <Route
           path="/register"
           element={<Register />} // can make it protected if needed
+        />
+
+        {/* About Us */}
+        <Route
+          path="/about"
+          element={<About />} // Public page
+        />
+
+        {/* Terms of Service */}
+        <Route
+          path="/terms"
+          element={<Terms />} // Public page
+        />
+        {/* Terms of Service */}
+        <Route
+          path="/privacy"
+          element={<Privacy />} // Public page
         />
 
         {/* Dashboard */}

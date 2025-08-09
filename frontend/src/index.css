@@ -5,3 +5,200 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
 }
+
+/* Main content background for light mode */
+.main-content {
+  background-color: #fbfffe;
+}
+
+/* Dark mode classes */
+.dark-mode {
+  background-color: #1b1b1e !important;
+  color: #fbfffe !important;
+}
+
+.dark-mode .navbar {
+  background-color: #6d676e !important;
+  border-bottom-color: #faa916 !important;
+}
+
+.dark-mode .navbar h2,
+.dark-mode .navbar a {
+  color: #fbfffe !important;
+}
+
+.dark-mode .navbar a:hover {
+  color: #faa916 !important;
+}
+
+.dark-mode .main-content {
+  color: white;
+  background-color: #1b1b1e !important;
+}
+
+.dark-mode .footer {
+  background-color: #6d676e !important;
+  border-top-color: #1b1b1e !important;
+}
+
+.dark-mode .footer a {
+  color: #1b1b1e !important;
+}
+
+.dark-mode .footer a:hover {
+  color: #fbfffe !important;
+}
+
+.dark-mode .footer .copyright {
+  color: #1b1b1e !important;
+}
+
+.dark-mode .dark-toggle {
+  background-color: #faa916 !important;
+  color: #1b1b1e !important;
+}
+
+.dark-mode .dark-toggle:hover {
+  background-color: #6d676e !important;
+}
+
+/* About page specific dark mode classes */
+.dark-mode .about-container {
+  background-color: #1b1b1e !important;
+}
+
+.dark-mode .navbar-title {
+  color: #fbfffe !important;
+}
+
+.dark-mode .nav-link {
+  color: #fbfffe !important;
+}
+
+.dark-mode .nav-link:hover {
+  color: #faa916 !important;
+}
+
+.dark-mode .about-title {
+  color: #fbfffe !important;
+}
+
+.dark-mode .section-title {
+  color: #fbfffe !important;
+}
+
+.dark-mode .mission-text {
+  color: #fbfffe !important;
+}
+
+.dark-mode .features-list {
+  color: #fbfffe !important;
+}
+
+.dark-mode .feature-item {
+  color: #fbfffe !important;
+}
+
+.dark-mode .benefit-card {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(250, 169, 22, 0.3) !important;
+}
+
+.dark-mode .benefit-title {
+  color: #fbfffe !important;
+}
+
+.dark-mode .benefit-text {
+  color: #fbfffe !important;
+}
+
+.dark-mode .cta-title {
+  color: #fbfffe !important;
+}
+
+.dark-mode .cta-button {
+  background-color: #faa916 !important;
+  color: #1b1b1e !important;
+}
+
+.dark-mode .cta-button:hover {
+  background-color: #96031a !important;
+  color: #fbfffe !important;
+}
+
+.dark-mode .footer-links {
+  color: #1b1b1e !important;
+}
+
+.dark-mode .footer-link {
+  color: #1b1b1e !important;
+}
+
+.dark-mode .footer-link:hover {
+  color: #fbfffe !important;
+}
+
+/* Terms page specific dark mode classes */
+.dark-mode .terms-container {
+  background-color: #1b1b1e !important;
+}
+
+.dark-mode .terms-title {
+  color: #fbfffe !important;
+}
+
+.dark-mode .effective-date {
+  color: #fbfffe !important;
+}
+
+.dark-mode .terms-section {
+  color: #fbfffe !important;
+}
+
+.dark-mode .section-text {
+  color: #fbfffe !important;
+}
+
+.dark-mode .definitions-list {
+  color: #fbfffe !important;
+}
+
+.dark-mode .eligibility-list {
+  color: #fbfffe !important;
+}
+
+.dark-mode .responsibilities-list {
+  color: #fbfffe !important;
+}
+
+.dark-mode .acceptable-use-list {
+  color: #fbfffe !important;
+}
+
+.dark-mode .content-rights-list {
+  color: #fbfffe !important;
+}
+
+.dark-mode .ip-list {
+  color: #fbfffe !important;
+}
+
+.dark-mode .payment-list {
+  color: #fbfffe !important;
+}
+
+.dark-mode .termination-list {
+  color: #fbfffe !important;
+}
+
+.dark-mode .disclaimers-list {
+  color: #fbfffe !important;
+}
+
+.dark-mode .email-link {
+  color: #faa916 !important;
+}
+
+.dark-mode .email-link:hover {
+  color: #fbfffe !important;
+}
