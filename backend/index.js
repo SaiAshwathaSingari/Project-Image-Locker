@@ -37,6 +37,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRoute);
+const UserFaceRegistrationController = require("./routes/UserFaceRegistrationRoute.js");
+app.use("/api", UserFaceRegistrationController); 
 
 app.listen(port, () => {
   console.log(`🚀 Server is running on http://localhost:${port}`);

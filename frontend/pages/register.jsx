@@ -1,50 +1,88 @@
 import React, { useRef, useState, useEffect } from "react";
+import axios from "axios";
 
-function CameraCapture({ onCapture }) {
+function CameraCapture({ userId }) {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const [stream, setStream] = useState(null);
+  const streamRef = useRef(null);
+  const [uploading, setUploading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  // Start camera on mount
   useEffect(() => {
     async function startCamera() {
       try {
         const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
-        videoRef.current.srcObject = mediaStream;
-        setStream(mediaStream);
+        if (videoRef.current) {
+          videoRef.current.srcObject = mediaStream;
+          streamRef.current = mediaStream;
+        }
       } catch (err) {
         console.error("Error accessing webcam:", err);
+        setMessage("Error accessing webcam");
       }
     }
     startCamera();
 
-    // Cleanup on unmount: stop media tracks
     return () => {
-      if (stream) {
-        stream.getTracks().forEach(track => track.stop());
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
   }, []);
 
-  // Capture photo from video feed
-  const handleCapture = () => {
+  const handleCaptureAndUpload = () => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    if (!video || !canvas) return;
+    if (!video || !canvas) {
+      setMessage("Video or canvas not available");
+      return;
+    }
 
-    // Set canvas size same as video
+    if (video.videoWidth === 0 || video.videoHeight === 0) {
+      setMessage("Video not ready for capture yet. Please wait.");
+      return;
+    }
+
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
     const ctx = canvas.getContext("2d");
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    // Get image as base64 or blob
-    canvas.toBlob(blob => {
-      if (onCapture) {
-        onCapture(blob); // Pass blob back to parent or handler
-      }
-    }, "image/jpeg", 0.95);
+    canvas.toBlob(
+      async (blob) => {
+        if (!blob) {
+          setMessage("Failed to capture image");
+          return;
+        }
+
+        setUploading(true);
+        setMessage("");
+
+        try {
+          const formData = new FormData();
+          formData.append("photo", blob, "capture.png");
+
+          // Append userId here
+          formData.append("userId", userId);
+
+          const response = await axios.post("/api/face-register", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            withCredentials: true,
+          });
+
+          setMessage(response.data.message || "Upload successful");
+        } catch (error) {
+          console.error("Upload failed:", error);
+          setMessage("Upload failed. Please try again.");
+        } finally {
+          setUploading(false);
+        }
+      },
+      "image/png"
+    );
   };
 
   return (
@@ -58,7 +96,8 @@ function CameraCapture({ onCapture }) {
       />
       <canvas ref={canvasRef} style={{ display: "none" }} />
       <button
-        onClick={handleCapture}
+        onClick={handleCaptureAndUpload}
+        disabled={uploading}
         style={{
           marginTop: "20px",
           padding: "12px 30px",
@@ -66,13 +105,14 @@ function CameraCapture({ onCapture }) {
           fontWeight: "600",
           borderRadius: 25,
           border: "none",
-          backgroundColor: "#3f51b5",
+          backgroundColor: uploading ? "#999" : "#3f51b5",
           color: "white",
-          cursor: "pointer"
+          cursor: uploading ? "not-allowed" : "pointer",
         }}
       >
-        Capture Photo
+        {uploading ? "Uploading..." : "Capture Photo"}
       </button>
+      {message && <p style={{ marginTop: 12, color: "#333" }}>{message}</p>}
     </div>
   );
 }
